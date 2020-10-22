@@ -1,0 +1,14 @@
+{
+  "name": "mateusoli21/learning-doctrine",
+  "description": "Projeto para aprender sobre doctrine orm",
+  "type": "library",
+  "authors": [],
+  "require": {
+    "doctrine/orm": "^2.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "Mateus\\Doctrine\\": "src/"
+    }
+  }
+}
