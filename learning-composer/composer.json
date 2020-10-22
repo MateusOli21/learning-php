@@ -1,0 +1,16 @@
+{
+  "name": "cviniciussdias/buscador-cursos",
+  "description": "Projeto que busca os cursos no site da Alura",
+  "type": "library",
+  "authors": [],
+  "require": {
+    "guzzlehttp/guzzle": "^7.2",
+    "symfony/dom-crawler": "^5.1",
+    "symfony/css-selector": "^5.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Alura\\BuscadorDeCursos\\": "src/"
+    }
+  }
+}
