@@ -25,6 +25,16 @@ class Student{
      * @OneToMany(targetEntity="Phone", mappedBy="student", cascade={"remove", "persist"})
      */
     private $phones;
+
+    /**
+     * @ManyToMany(targetEntity="Course", mappedBy="students")
+     */
+    private $courses;
+
+    public function __construct(){
+        $this->phones = new ArrayCollection();
+        $this->courses = new ArrayCollection();
+    }
     
     public function getId(): int{
         return $this->id;
@@ -33,7 +43,6 @@ class Student{
     public function getName(): string{
         return $this->name;
     }
-
     
     public function setName(string $name): self{
         $this->name = $name;
@@ -41,11 +50,7 @@ class Student{
         return $this;
     }
 
-    public function __construct(){
-        $this->phones = new ArrayCollection();
-    }
-
-    public function addPhone(Phone $phone){
+    public function addPhone(Phone $phone): self{
         $this->phones->add($phone);
         $phone->setStudent($this);
         return $this;
@@ -53,5 +58,23 @@ class Student{
 
     public function getPhones(): Collection{
         return $this->phones;
+    }
+
+    /**
+     * @return Course[]
+     */
+    public function getCourses(): Collection{
+        return $this->courses;
+    }
+
+    public function addCourse(Course $course): self{
+        if ($this->courses->contains($course)) {
+            return $this;
+        }
+
+        $this->courses->add($course);
+        $course->addStudent($this);
+
+        return $this;
     }
 }

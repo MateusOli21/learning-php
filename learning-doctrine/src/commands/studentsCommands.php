@@ -5,10 +5,6 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 use Mateus\Doctrine\entity\Phone;
 use Mateus\Doctrine\entity\Student;
-use Mateus\Doctrine\helper\EntityManagerFactory;
-
-$entityManagerFactory = new EntityManagerFactory();
-$entityManager = $entityManagerFactory->getEntityManager();
 
 
 function getStudentRepository($entityManager){
@@ -37,7 +33,15 @@ function listStudents($entityManager){
     $studentsRepository = getStudentRepository($entityManager);
     $studentsList = $studentsRepository->findAll();
 
-    return $studentsList;
+    foreach ($studentsList as $student) {
+    $phoneNumbers = $student->getPhones()->map(function(Phone $phoneNumber){
+        return $phoneNumber->getNumber();
+    });
+
+    echo "Name: {$student->getName()}" . PHP_EOL;
+    echo "Phones: {$phoneNumbers[0]}" . PHP_EOL;
+    echo PHP_EOL;
+    }   
 }
 
 function findStudentByName( string $studentName, $entityManager){
