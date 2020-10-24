@@ -1,98 +1,25 @@
 <?php
 
-use Mateus\Doctrine\entity\Student;
-use Mateus\Doctrine\helper\EntityManagerFactory;
+use Mateus\Doctrine\entity\Phone;
 
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/src/commands/studentsCommands.php';
 
 
-$entityManagerFactory = new EntityManagerFactory();
-$entityManager = $entityManagerFactory->getEntityManager();
-
-function getStudentRepository($entityManager){
-    return $entityManager->getRepository(Student::class);
-}
-
-
-function createStudent( string $studentName, $entityManager ){
-    $newStudent = new Student();
-    $newStudent->setName($studentName);
-
-    $entityManager->persist($newStudent);    
-    $entityManager->flush();
-}
-
-function listStudents($entityManager){
-    $studentsRepository = getStudentRepository($entityManager);
-    $studentsList = $studentsRepository->findAll();
-
-    return $studentsList;
-}
-
-function findStudentByName( string $studentName, $entityManager){
-    $studentsRepository = getStudentRepository($entityManager);
-
-    $student = $studentsRepository->findOneBy([
-        'name' => $studentName
-    ]);
-
-    if(!$student){
-        return "Couldn't find the specified student.";
-    }
-
-    return $student;
-}
-
-function findStudentById(int $studentId, $entityManager){
-    $studentsRepository = getStudentRepository($entityManager);
-    $student = $studentsRepository->find($studentId);
-
-    if(!$student){
-        return "Couldn't find the specified student.";
-    }
-
-    return $student;
-}
-
-function updateStudentName(int $studentId, string $newStudentName, $entityManager){
-    $studentsRepository = getStudentRepository($entityManager);
-    $student = $studentsRepository->find($studentId);
-
-    if(!$student){
-        return "Couldn't find the specified student.";
-    }
-
-    $student->setName($newStudentName);
-    
-    $entityManager->flush();
-
-    return "Student name updated successfully.";
-}
-
-function deleteStudent(int $studentId, $entityManager){
-    $student = findStudentById($studentId, $entityManager);
-
-    if(gettype($student) == 'string'){
-        return $student;
-    }
-
-    $entityManager->remove($student);
-    $entityManager->flush();
-
-    return "Student deleted successfully.";
-}
-
-
-createStudent("Joao Silva", $entityManager);
+$singleStudent = findStudentByName("Mateus Oliveira", $entityManager);
+echo $singleStudent->getName() . PHP_EOL;
 
 $studentsList = listStudents($entityManager);
 foreach ($studentsList as $student) {
-    echo($student->getName()) . PHP_EOL;
+    $phoneNumbers = $student->getPhones()->map(function(Phone $phoneNumber){
+        return $phoneNumber->getNumber();
+    });
+
+    echo "Name: {$student->getName()}" . PHP_EOL;
+    echo "Phones: {$phoneNumbers[0]}" . PHP_EOL;
+    echo PHP_EOL;
 }
 
-$singleStudent = findStudentByName("Mateus Oliveira", $entityManager);
-echo($singleStudent->getName()) . PHP_EOL;
-
-echo(updateStudentName(3, "Antonio Silva", $entityManager)) . PHP_EOL;
-
-echo(deleteStudent(5, $entityManager)) . PHP_EOL;
+// createStudent('Pedro Silva', $entityManager, '11947586932');
+// echo(updateStudentName(3, "Antonio Silva", $entityManager)) . PHP_EOL;
+// echo(deleteStudent(5, $entityManager)) . PHP_EOL;

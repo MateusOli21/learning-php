@@ -1,6 +1,10 @@
 <?php
 
 namespace Mateus\Doctrine\entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 /**
  * @Entity
  */
@@ -16,6 +20,11 @@ class Student{
      * @Column(type="string")
      */
     private $name;
+
+    /**
+     * @OneToMany(targetEntity="Phone", mappedBy="student", cascade={"remove", "persist"})
+     */
+    private $phones;
     
     public function getId(): int{
         return $this->id;
@@ -30,5 +39,19 @@ class Student{
         $this->name = $name;
 
         return $this;
+    }
+
+    public function __construct(){
+        $this->phones = new ArrayCollection();
+    }
+
+    public function addPhone(Phone $phone){
+        $this->phones->add($phone);
+        $phone->setStudent($this);
+        return $this;
+    }
+
+    public function getPhones(): Collection{
+        return $this->phones;
     }
 }
