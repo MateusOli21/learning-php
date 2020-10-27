@@ -5,7 +5,7 @@ namespace Mateus\Doctrine\entity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @Entity
+ * @Entity(repositoryClass="Mateus\Doctrine\repository\CourseRepository")
  */
 class Course{
     /**
