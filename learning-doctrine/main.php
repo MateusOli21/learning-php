@@ -13,8 +13,10 @@ $entityManager = $entityManagerFactory->getEntityManager();
 $singleStudent = findStudentByName("Mateus Oliveira", $entityManager);
 
 listStudents($entityManager);
-listCoursesAndStudents($entityManager);
+echo(getTotalOfStudents($entityManager)) . PHP_EOL;
 
+listCoursesAndStudents($entityManager);
+listCoursesAndStudentsWithDql($entityManager);
 
 // createStudent('Pedro Silva', $entityManager, '11947586932');
 // echo(updateStudentName(3, "Antonio Silva", $entityManager)) . PHP_EOL;

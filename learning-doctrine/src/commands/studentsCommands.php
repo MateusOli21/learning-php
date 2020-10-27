@@ -30,8 +30,9 @@ function createStudent( string $studentName, $entityManager, ...$phoneNumbers ){
 }
 
 function listStudents($entityManager){
-    $studentsRepository = getStudentRepository($entityManager);
-    $studentsList = $studentsRepository->findAll();
+    $dql = "SELECT student FROM Mateus\\Doctrine\\entity\\Student student";
+    $query = $entityManager->createQuery($dql);
+    $studentsList = $query->getResult(); 
 
     foreach ($studentsList as $student) {
     $phoneNumbers = $student->getPhones()->map(function(Phone $phoneNumber){
@@ -95,5 +96,14 @@ function deleteStudent(int $studentId, $entityManager){
     $entityManager->flush();
 
     return "Student deleted successfully.";
+}
+
+function getTotalOfStudents($entityManager){
+    $studentClass = Student::class;
+    $dql = "SELECT COUNT(student) FROM $studentClass student";
+    $query = $entityManager->createQuery($dql);
+    $totalSudents = $query->getSingleScalarResult();
+
+    return $totalSudents;
 }
 

@@ -45,7 +45,33 @@ function listCoursesAndStudents($entityManager){
         
         echo PHP_EOL;
     }
-
 }
 
+function listCoursesAndStudentsWithDql($entityManager){
+    $studentClass = Student::class;
+    $dql = "SELECT student, phones FROM $studentClass student JOIN student.phones phones";
+    $query = $entityManager->createQuery($dql);
+
+    /** @var Student[] $students */
+    $students = $query->getResult();
+
+    foreach($students as $student){
+        echo "Name: {$student->getName()}" . PHP_EOL;
+
+        $phones = $student->getPhones();
+
+        foreach($phones as $phone){
+            echo "Phone: {$phone->getNumber()}" . PHP_EOL;
+        }
+
+        /** @var Course[] $courses  */
+        $courses = $student->getCourses();
+
+        foreach($courses as $course){
+            echo "\t Course: {$course->getName()}" . PHP_EOL;  
+            echo PHP_EOL;   
+        }
+
+    }
+}
 
