@@ -1,0 +1,15 @@
+{
+  "name": "mateusoli21/learning-mvc",
+  "description": "",
+  "type": "library",
+  "authors": [],
+  "require": {
+    "doctrine/orm": "^2.7",
+    "doctrine/migrations": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Mateus\\MVC\\": "src/"
+    }
+  }
+}
