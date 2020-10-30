@@ -6,7 +6,7 @@ use Mateus\MVC\entity\Course;
 use Mateus\MVC\infra\EntityManagerFactory;
 use Mateus\MVC\interfaces\RequisitionControllerInterface;
 
-class ListCoursesController implements RequisitionControllerInterface{
+class ListCoursesController extends OutputHtmlController implements RequisitionControllerInterface{
     private $coursesRepository;
 
     public function __construct(){
@@ -18,8 +18,14 @@ class ListCoursesController implements RequisitionControllerInterface{
 
     public function processRequisition(): void{
         $courses = $this->coursesRepository->findAll();
-        $title = 'Lista de cursos';
 
-        require __DIR__ . '/../views/courses/listCourses.php';
+        $path = 'listCourses.php';
+        $data = [
+            'courses' => $courses,
+            'title' => 'Lista de cursos'
+        ];
+
+        $this->renderHtml($path, $data);
+
     }
 }

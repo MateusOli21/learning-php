@@ -4,11 +4,15 @@ namespace Mateus\MVC\controllers;
 
 use Mateus\MVC\interfaces\RequisitionControllerInterface;
 
-class CreateCourseController implements RequisitionControllerInterface{
+class CreateCourseController extends OutputHtmlController implements RequisitionControllerInterface{
     public function processRequisition(): void{
-        $title = 'Criar um curso';
+        $path = 'createCourse.php';
+        $data = [
+            'title' => 'Criar um novo curso',
+            'buttonText' => 'Criar'
+        ];
 
-        require __DIR__ . '/../views/courses/createCourse.php';
+        $this->renderHtml($path, $data);
     }
 }
 

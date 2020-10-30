@@ -12,8 +12,19 @@
         <ul class="list-group">
             <?php
                 foreach($courses as $course): ?>
-            <li class="list-group-item">
-            <?= $course->getName(); ?>
+            <li class="list-group-item d-flex justify-content-between">
+                <?= $course->getName(); ?>
+
+                <div class="buttons">
+                    <a href="/update-course?id=<?= $course->getId() ?>" 
+                        class="btn btn-info btn-sm">
+                        Editar
+                    </a>
+                    <a href="/delete-course?id=<?= $course->getId() ?>" 
+                        class="btn btn-danger btn-sm">
+                        Excluir
+                    </a>
+                </div>
             </li>
         
             <?php endforeach ?>

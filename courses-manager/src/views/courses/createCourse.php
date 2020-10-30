@@ -8,14 +8,15 @@
             <h1> <?= $title ?></h1>
         </div>
 
-        <form action="/save-course" method="POST">
+        <form action="<?= isset($course) ? "/persist-course-update?id=" . $course->getId() : '/persist-course' ?>" method="POST">
             <div class="form-group">
                 <label for="name">Nome do curso</label>
                 <input 
                 type="text" 
                 id="name" 
                 name="name" 
-                class="form-control"/>
+                class="form-control"
+                value="<?= isset($course) ? $course->getName() : '' ?>"/>
                 
                 
                 <label for="description">Descrição</label>
@@ -23,9 +24,10 @@
                 type="text" 
                 id="description" 
                 name="description" 
-                class="form-control"/>
+                class="form-control"
+                value="<?= isset($course) ? $course->getDescription() : '' ?>"/>
             </div>
-            <button class="btn btn-primary">Criar novo curso</button>
+            <button class="btn btn-primary"> <?= $buttonText ?></button>
         </form>
     </div>
 </body>
