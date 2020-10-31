@@ -19,7 +19,7 @@ class PersistUpdateController implements RequisitionControllerInterface{
         $id = filter_input( INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
         if (is_null($id) || $id === false) {
-            header('Location: /');
+            header('Location: /list-courses');
             return;
         }
 
@@ -36,6 +36,6 @@ class PersistUpdateController implements RequisitionControllerInterface{
 
         $this->entityManager->flush();
 
-        header('Location: /');
+        header('Location: /list-courses');
     }
 }

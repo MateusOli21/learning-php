@@ -12,8 +12,18 @@ if(!array_key_exists($path, $routes)){
     exit();
 }
 
-$controllerClass = $routes[$path];
+session_start();
 
+if(!isset($_SESSION['logged']) 
+    && $path !== null 
+    && $path !== '/validate-login' 
+    && $path !== '/sign-up'){
+    header('Location: /');
+    exit();
+}
+
+$controllerClass = $routes[$path];
+    
 /**  @var RequisitionControllerInterface $controller */
 $controller = new $controllerClass();
 $controller->processRequisition();

@@ -4,6 +4,7 @@ use Mateus\MVC\controllers\{
     DeleteCourseController, 
     ListCoursesController,
     LoginController,
+    LogoutController,
     PersistCourseController,
     PersistUpdateController,
     SignUpController,
@@ -15,6 +16,7 @@ use Mateus\MVC\controllers\{
 $routes = [
     '' => LoginController::class,
     '/sign-up' => SignUpController::class,
+    '/log-out' => LogoutController::class,
     '/list-courses' => ListCoursesController::class,
     '/create-course' => CreateCourseController::class,
     '/delete-course' => DeleteCourseController::class,

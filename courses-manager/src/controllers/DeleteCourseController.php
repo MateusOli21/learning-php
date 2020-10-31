@@ -21,7 +21,7 @@ class DeleteCourseController implements RequisitionControllerInterface {
         $id = filter_input( INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
         if (is_null($id) || $id === false) {
-            header('Location: /', true);
+            header('Location: /list-courses', true);
             return;
         }
 
@@ -30,6 +30,6 @@ class DeleteCourseController implements RequisitionControllerInterface {
         $this->entityManager->remove($course);
         $this->entityManager->flush();
 
-        header('Location: /');
+        header('Location: /list-courses');
     }
 }

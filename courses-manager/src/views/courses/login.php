@@ -2,7 +2,6 @@
     include __DIR__ . '/../htmlStructure/htmlHead.php' 
 ?>
 
-<body>
     <div class="container">
         <div class="jumbotron">
             <h1> <?= $title ?></h1>
@@ -31,7 +30,6 @@
             </a>
         </form>
     </div>
-</body>
         
 <?php
     include __DIR__ . '/../htmlStructure/htmlCloseTags.php' 

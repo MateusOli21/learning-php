@@ -26,6 +26,6 @@ class PersistCourseController implements RequisitionControllerInterface{
         $this->entityManager->persist($course);
         $this->entityManager->flush();
 
-        header('Location: /', true, 302);
+        header('Location: /list-courses', true, 302);
     }
 }

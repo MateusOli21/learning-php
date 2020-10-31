@@ -19,7 +19,7 @@ class UpdateCourseController extends OutputHtmlController implements Requisition
         $id = filter_input( INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
         if (is_null($id) || $id === false) {
-            header('Location: /', true);
+            header('Location: /list-courses', true);
             return;
         }
 

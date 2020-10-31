@@ -35,6 +35,8 @@ class ValidateLoginController implements RequisitionControllerInterface {
             return;
         }
 
+        $_SESSION['logged'] = true;
+
         header('Location: /list-courses');
     }
 }
