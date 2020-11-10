@@ -25,4 +25,10 @@ class SeriesController extends Controller {
 
         return redirect('/');
     }
+
+    public function delete(Request $request){
+        Serie::destroy($request->id);
+
+        return redirect('/');
+    }
 }
