@@ -24,3 +24,5 @@ Route::post('/series/create', "SeriesController@store");
 Route::post('/series/{id}/delete', "SeriesController@delete");
 
 Route::get('/series/{id}/info', "SeasonsController@index");
+
+Route::post('/series/{id}/edit', 'SeriesController@update');

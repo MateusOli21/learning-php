@@ -29,6 +29,13 @@ class SeriesController extends Controller {
         return redirect('/');
     }
 
+    public function update(Request $request, int $id){
+        $newName = $request->name;
+        $serie = Serie::find($id);
+        $serie->name = $newName;
+        $serie->save();
+    }
+
     public function delete(Request $request, SeriesRemover $seriesRemover){
         $seriesRemover->deleteSerie($request->id);
 
