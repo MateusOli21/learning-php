@@ -19,7 +19,7 @@
                     <a href="/series/{{ $serie->id }}/info" class="btn btn-info btn-sm mr-2">
                         <i class="fas fa-external-link-alt"></i>
                     </a>
-                    <form method="POST" action="/series/delete/{{ $serie->id }}">
+                    <form method="POST" action="/series/{{ $serie->id }}/delete">
                         @csrf
                         <button class="btn btn-danger btn-sm">
                             <i class="far fa-trash-alt"></i>
