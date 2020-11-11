@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SeriesFormRequest;
+use App\Season;
 use App\Serie;
 use Illuminate\Http\Request;
 
@@ -20,9 +21,27 @@ class SeriesController extends Controller {
     public function store(SeriesFormRequest $request){
         $name = $request->get('name');
 
-        Serie::create([
+        /**
+         * @var Serie $serie
+         */
+        $serie = Serie::create([
             'name' => $name
         ]);
+
+        $numberOfSeasons = $request->number_seasons;
+        $numberOfEpisodes = $request->number_episodes;
+
+        for ($i = 1; $i <= $numberOfSeasons ; $i++) {
+
+            /**
+             * @var Season $season
+             */
+            $season = $serie->seasons()->create(['number' => $i]);
+
+            for ($index = 1; $index <= $numberOfEpisodes ; $index++) {
+                $season->episodes()->create(['number' => $index]);
+            }
+        }
 
         return redirect('/');
     }

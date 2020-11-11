@@ -15,10 +15,17 @@
                 justify-content-between
                 align-items-center">
                 {{ $serie->name }}
-                <form method="POST" action="/series/delete/{{ $serie->id }}">
-                    @csrf
-                    <button class="btn btn-danger">Excluir</button>
-                </form>
+                <div class="d-flex">
+                    <a href="/series/{{ $serie->id }}/info" class="btn btn-info btn-sm mr-2">
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    <form method="POST" action="/series/delete/{{ $serie->id }}">
+                        @csrf
+                        <button class="btn btn-danger btn-sm">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </form>
+                </div>
             </li>
         @endforeach
     </ul>
