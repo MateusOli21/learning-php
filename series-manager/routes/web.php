@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/welcome', function () {
     return view('welcome');
 });
@@ -23,6 +24,10 @@ Route::post('/series/create', "SeriesController@store");
 
 Route::post('/series/{id}/delete', "SeriesController@delete");
 
-Route::get('/series/{id}/info', "SeasonsController@index");
-
 Route::post('/series/{id}/edit', 'SeriesController@update');
+
+Route::get('/series/{id}/seasons', "SeasonsController@index");
+
+Route::get('/seasons/{id}/info', 'EpisodesController@index');
+
+Route::post('/seasons/{id}/episodes/watch', 'EpisodesController@store');

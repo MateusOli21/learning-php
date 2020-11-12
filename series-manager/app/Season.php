@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 
 class Season extends Model{
     protected $fillable = ['number'];
@@ -13,5 +14,11 @@ class Season extends Model{
 
     public function serie(){
         return $this->belongsTo(Serie::class);
+    }
+
+    public function listWatchedEpisodes(): Collection{
+        return $this->episodes->filter(function(Episode $episode){
+            return $episode->watched;
+        });
     }
 }

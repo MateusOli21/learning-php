@@ -41,7 +41,7 @@
                     onclick="toggleInput({{ $serie->id }})">
                         <i class="fas fa-edit"></i>
                     </button>
-                    <a href="/series/{{ $serie->id }}/info"
+                    <a href="/series/{{ $serie->id }}/seasons"
                         class="btn btn-info btn-sm mr-2">
                         <i class="fas fa-external-link-alt"></i>
                     </a>
